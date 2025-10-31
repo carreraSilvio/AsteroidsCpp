@@ -149,7 +149,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BrightLib\BrightFSM.cpp" />
+    <ClCompile Include="BrightLib\BrightInput\BrightInputService.cpp" />
+    <ClCompile Include="BrightLib\BrightState.cpp" />
+    <ClCompile Include="BrightLib\BrightUI\BrightView.cpp" />
+    <ClCompile Include="BrightLib\BrightUI\BrightViewManager.cpp" />
+    <ClCompile Include="Fruit.cpp" />
+    <ClCompile Include="HighscoreService.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Play_GameState.cpp" />
+    <ClCompile Include="ScoreView.cpp" />
+    <ClCompile Include="Services.cpp" />
+    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SnakePiece.cpp" />
+    <ClCompile Include="TitleView.cpp" />
+    <ClCompile Include="Title_GameState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BrightLib\BrightEvent.h" />
+    <ClInclude Include="BrightLib\BrightFSM.h" />
+    <ClInclude Include="BrightLib\BrightInput\BrightInputService.h" />
+    <ClInclude Include="BrightLib\BrightRandom.h" />
+    <ClInclude Include="BrightLib\BrightState.h" />
+    <ClInclude Include="BrightLib\BrightUI\BrightView.h" />
+    <ClInclude Include="BrightLib\BrightUI\BrightViewManager.h" />
+    <ClInclude Include="BrightLib\CollisionManager.h" />
+    <ClInclude Include="Fruit.h" />
+    <ClInclude Include="GameConstants.h" />
+    <ClInclude Include="HighscoreService.h" />
+    <ClInclude Include="Play_GameState.h" />
+    <ClInclude Include="ScoreView.h" />
+    <ClInclude Include="Services.h" />
+    <ClInclude Include="Snake.h" />
+    <ClInclude Include="SnakePiece.h" />
+    <ClInclude Include="TitleView.h" />
+    <ClInclude Include="Title_GameState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\arial.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

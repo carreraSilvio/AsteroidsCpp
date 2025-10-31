@@ -13,10 +13,134 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="BrightLib">
+      <UniqueIdentifier>{c844c12b-6f1a-41fd-aae0-ed19f16f772d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BrightLib\BrightUI">
+      <UniqueIdentifier>{65f1f103-1a53-44e5-a1d8-c4b5e92f9722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BrightLib\BrightInput">
+      <UniqueIdentifier>{35687486-ed87-4a19-a076-397b4982388e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entitites">
+      <UniqueIdentifier>{a793dacd-f86a-4ccf-a0c4-d4637349410b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{0347a49b-4bba-463c-8fc5-2de11dcd848b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameFSM">
+      <UniqueIdentifier>{e5db517d-04ca-4e3c-96db-c050e6f4ee5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameUI">
+      <UniqueIdentifier>{fe6d37e2-dbf6-4aa7-8f0c-78e6809874b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BrightLib\BrightFSM.cpp">
+      <Filter>BrightLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BrightLib\BrightState.cpp">
+      <Filter>BrightLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BrightLib\BrightUI\BrightView.cpp">
+      <Filter>BrightLib\BrightUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BrightLib\BrightUI\BrightViewManager.cpp">
+      <Filter>BrightLib\BrightUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BrightLib\BrightInput\BrightInputService.cpp">
+      <Filter>BrightLib\BrightInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Fruit.cpp">
+      <Filter>Source Files\Entitites</Filter>
+    </ClCompile>
+    <ClCompile Include="Snake.cpp">
+      <Filter>Source Files\Entitites</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakePiece.cpp">
+      <Filter>Source Files\Entitites</Filter>
+    </ClCompile>
+    <ClCompile Include="HighscoreService.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Play_GameState.cpp">
+      <Filter>Source Files\GameFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_GameState.cpp">
+      <Filter>Source Files\GameFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreView.cpp">
+      <Filter>Source Files\GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleView.cpp">
+      <Filter>Source Files\GameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Services.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameConstants.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightLib\BrightEvent.h">
+      <Filter>BrightLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightLib\BrightFSM.h">
+      <Filter>BrightLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightLib\BrightRandom.h">
+      <Filter>BrightLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightLib\BrightState.h">
+      <Filter>BrightLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightLib\CollisionManager.h">
+      <Filter>BrightLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightLib\BrightUI\BrightView.h">
+      <Filter>BrightLib\BrightUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightLib\BrightUI\BrightViewManager.h">
+      <Filter>BrightLib\BrightUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BrightLib\BrightInput\BrightInputService.h">
+      <Filter>BrightLib\BrightInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Fruit.h">
+      <Filter>Source Files\Entitites</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake.h">
+      <Filter>Source Files\Entitites</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakePiece.h">
+      <Filter>Source Files\Entitites</Filter>
+    </ClInclude>
+    <ClInclude Include="HighscoreService.h">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_GameState.h">
+      <Filter>Source Files\GameFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Title_GameState.h">
+      <Filter>Source Files\GameFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreView.h">
+      <Filter>Source Files\GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleView.h">
+      <Filter>Source Files\GameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Services.h">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\arial.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>
