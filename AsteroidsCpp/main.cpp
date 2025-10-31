@@ -14,6 +14,8 @@ int main()
 
     //initialize service locator
     Services services;
+    services.Input().bindKey(BrightActionButton::THRUST_FORWARD, sf::Keyboard::Key::Up);
+    services.Input().bindKey(BrightActionButton::THRUST_FORWARD, sf::Keyboard::Key::W);
 
     //load save game
     services.Highscore().load();

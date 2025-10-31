@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BrightLib/BrightState.h"
-#include "Snake.h"
+#include "Ship.h"
 #include "Fruit.h"
 #include "ScoreView.h"
 
@@ -9,7 +9,7 @@ class Play_GameState : public BrightState
 {
 public:
 	unsigned int playerScore = 0;
-	Snake snake;
+	Ship ship;
 	Fruit fruit;
 
 	float playerAteFruitTimer = 0.0f;
@@ -36,6 +36,6 @@ private:
 
 	void handleSnakeReachScreenEdge();
 
-	sf::Vector2f getRandomFreePosition(const Snake& snake);
+	sf::Vector2f getRandomFreePosition(const Ship& ship);
 };
 

@@ -4,14 +4,14 @@
 #include "Services.h"
 
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
-    snake(50.0f, 50.0f),
+    ship(50.0f, 50.0f),
     fruit(50.0f, 0.0f)
 {
     //UI
     scoreView = Services::Views().addView<ScoreView>();
 
     //hook up events
-    snake.onReachScreenEdge.subscribe([this]() { handleSnakeReachScreenEdge(); });
+    ship.onReachScreenEdge.subscribe([this]() { handleSnakeReachScreenEdge(); });
 }
 
 void Play_GameState::enter()
@@ -19,7 +19,7 @@ void Play_GameState::enter()
     float windowCenterX = GameConstants::WINDOW_WIDTH / 2.0f;
     float windowCenterY = GameConstants::WINDOW_HEIGHT / 2.0f;
 
-    snake.setPosition(windowCenterX, windowCenterY);
+    ship.setPosition(windowCenterX, windowCenterY);
     fruit.setPosition(windowCenterX, windowCenterY - 50.0f);
 
     playerAteFruitTimer = 0.0f;
@@ -33,9 +33,10 @@ std::type_index Play_GameState::update(float dt)
 {
     if (subState == GameState::Playing)
     {
-        snake.update(dt);
+        ship.update(dt);
         fruit.update(dt);
 
+        /*
         //check collision with fruit
         sf::Vector2f circleCenter = fruit.shape.getPosition() + sf::Vector2f(fruit.shape.getRadius(), fruit.shape.getRadius());
         if (fruit.active && CollisionManager::checkCollisionCircleRect(circleCenter, fruit.shape.getRadius(), snake.getHead().shape.getGlobalBounds()))
@@ -59,11 +60,12 @@ std::type_index Play_GameState::update(float dt)
                 }
             }
         }
+        */
 
     }
     else if (subState == GameState::PlayerAteFruit)
     {
-        snake.grow();
+        //snake.grow();
         playerScore++;
         scoreView->setScore(playerScore);
 
@@ -75,7 +77,7 @@ std::type_index Play_GameState::update(float dt)
         playerAteFruitTimer += dt;
         if (playerAteFruitTimer > 0.1f)
         {
-            fruit.setPosition(getRandomFreePosition(snake));
+            fruit.setPosition(getRandomFreePosition(ship));
 
             subState = GameState::Playing;
         }
@@ -98,8 +100,8 @@ std::type_index Play_GameState::update(float dt)
             scoreView->setHighscore(Services::Highscore().getHighscore());
             Services::Highscore().save();
 
-            fruit.setPosition(getRandomFreePosition(snake));
-            snake.resetPosition();
+            fruit.setPosition(getRandomFreePosition(ship));
+            ship.resetPosition();
 
             subState = GameState::Playing;
         }
@@ -110,7 +112,7 @@ std::type_index Play_GameState::update(float dt)
 
 void Play_GameState::draw(sf::RenderWindow& window)
 {
-    snake.draw(window);
+    ship.draw(window);
     fruit.draw(window);
 
     scoreView->draw(window);
@@ -118,10 +120,10 @@ void Play_GameState::draw(sf::RenderWindow& window)
 
 void Play_GameState::handleSnakeReachScreenEdge()
 {
-    subState = GameState::PlayerDied;
+    //subState = GameState::PlayerDied;
 }
 
-sf::Vector2f Play_GameState::getRandomFreePosition(const Snake& snake)
+sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)
 {
     sf::Vector2f pos;
     bool collision;
@@ -137,12 +139,14 @@ sf::Vector2f Play_GameState::getRandomFreePosition(const Snake& snake)
         pos.x = cellX * GameConstants::SNAKE_PIECE_SIZE;
         pos.y = cellY * GameConstants::SNAKE_PIECE_SIZE;
 
+        /*
         for (const auto& piece : snake.pieces) {
             if (piece.position == pos) {
                 collision = true;
                 break;
             }
         }
+        */
 
     } while (collision);
 

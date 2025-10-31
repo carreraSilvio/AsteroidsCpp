@@ -45,13 +45,13 @@ void Fruit::draw(sf::RenderWindow& window)
 	window.draw(shape);
 }
 
-void Fruit::setPosition(sf::Vector2f position)
-{
-	setPosition(position.x, position.y);
-}
-
 void Fruit::setPosition(float x, float y)
 {
 	position = { x,y };
+	setPosition(position);
+}
+void Fruit::setPosition(sf::Vector2f position)
+{
+	this->position = position;
 	shape.setPosition(position);
 }

@@ -160,8 +160,7 @@
     <ClCompile Include="Play_GameState.cpp" />
     <ClCompile Include="ScoreView.cpp" />
     <ClCompile Include="Services.cpp" />
-    <ClCompile Include="Snake.cpp" />
-    <ClCompile Include="SnakePiece.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="TitleView.cpp" />
     <ClCompile Include="Title_GameState.cpp" />
   </ItemGroup>
@@ -180,8 +179,7 @@
     <ClInclude Include="Play_GameState.h" />
     <ClInclude Include="ScoreView.h" />
     <ClInclude Include="Services.h" />
-    <ClInclude Include="Snake.h" />
-    <ClInclude Include="SnakePiece.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="TitleView.h" />
     <ClInclude Include="Title_GameState.h" />
   </ItemGroup>

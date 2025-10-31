@@ -57,10 +57,7 @@
     <ClCompile Include="Fruit.cpp">
       <Filter>Source Files\Entitites</Filter>
     </ClCompile>
-    <ClCompile Include="Snake.cpp">
-      <Filter>Source Files\Entitites</Filter>
-    </ClCompile>
-    <ClCompile Include="SnakePiece.cpp">
+    <ClCompile Include="Ship.cpp">
       <Filter>Source Files\Entitites</Filter>
     </ClCompile>
     <ClCompile Include="HighscoreService.cpp">
@@ -113,10 +110,7 @@
     <ClInclude Include="Fruit.h">
       <Filter>Source Files\Entitites</Filter>
     </ClInclude>
-    <ClInclude Include="Snake.h">
-      <Filter>Source Files\Entitites</Filter>
-    </ClInclude>
-    <ClInclude Include="SnakePiece.h">
+    <ClInclude Include="Ship.h">
       <Filter>Source Files\Entitites</Filter>
     </ClInclude>
     <ClInclude Include="HighscoreService.h">

@@ -25,8 +25,8 @@ public:
 	
 	void resetPosition();
 
-	void setPosition(sf::Vector2f);
 	void setPosition(float x, float y);
+	void setPosition(sf::Vector2f);
 
 };
 
