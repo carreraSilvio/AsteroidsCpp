@@ -2,10 +2,12 @@
 #include "GameConstants.h"
 #include "Services.h"
 
-Ship::Ship(float x, float y)
+Ship::Ship(float x, float y) 
+	: thrust(200.0f),
+	shootTimer(0.0f),
+	shootInterval(0.3f)
 {
 	rotation = sf::degrees(0.0f);
-	thrust = 200.0f;
 	linerDamping = 0.75f;
 
 	shape.setPointCount(3);
@@ -52,8 +54,10 @@ void Ship::update(float dt)
 
 
 	//shoot
-	if (Services::Input().isButtonPressed(BrightActionButton::SHOOT))
+	shootTimer += dt;
+	if (shootTimer > shootInterval && Services::Input().isButtonPressed(BrightActionButton::SHOOT))
 	{
+		shootTimer = 0.0f;
 		onShoot.fire();
 	}
 }

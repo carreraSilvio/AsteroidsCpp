@@ -1,9 +1,11 @@
 #include "Bullet.h"
 
-Bullet::Bullet(float x, float y) : BrightEntity()
+Bullet::Bullet(float x, float y)
+	: BrightEntity(),
+	speed(300.0f),
+	lifetimeTimer(0.0f)
 {
 	position = { x, y };
-	speed = 300.0f;
 
 	shape.setRadius(5);
 	shape.setFillColor(sf::Color::Blue);
@@ -22,7 +24,7 @@ void Bullet::update(float dt)
 	shape.setPosition(position);
 
 	lifetimeTimer += dt;
-	if (lifetimeTimer > lifetimeDuration)
+	if (lifetimeTimer > LIFETIME_DURATION)
 	{
 		lifetimeTimer = 0.0f;
 		active = false;

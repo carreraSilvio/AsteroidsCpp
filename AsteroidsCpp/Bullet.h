@@ -22,5 +22,5 @@ public:
 	void setPosition(sf::Vector2f);
 
 private:
-	const float lifetimeDuration = 0.3f;
+	const float LIFETIME_DURATION = 2.5f;
 };

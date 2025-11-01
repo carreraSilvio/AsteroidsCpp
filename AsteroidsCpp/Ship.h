@@ -38,7 +38,8 @@ public:
 	const sf::Vector2f getForwardVector();
 
 private:
-
+	float shootTimer;
+	float shootInterval;
 };
 
 #endif // SHIP_H
