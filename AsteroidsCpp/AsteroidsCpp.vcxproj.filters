@@ -145,6 +145,9 @@
     <ClInclude Include="BrightLib\BrightSpawner.h">
       <Filter>BrightLib</Filter>
     </ClInclude>
+    <ClInclude Include="BrightLib\BrightTimer.h">
+      <Filter>BrightLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\arial.ttf">

@@ -175,6 +175,7 @@
     <ClInclude Include="BrightLib\BrightRandom.h" />
     <ClInclude Include="BrightLib\BrightSpawner.h" />
     <ClInclude Include="BrightLib\BrightState.h" />
+    <ClInclude Include="BrightLib\BrightTimer.h" />
     <ClInclude Include="BrightLib\BrightUI\BrightView.h" />
     <ClInclude Include="BrightLib\BrightUI\BrightViewManager.h" />
     <ClInclude Include="BrightLib\CollisionManager.h" />

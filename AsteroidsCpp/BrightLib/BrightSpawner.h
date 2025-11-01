@@ -1,8 +1,8 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "BrightPool.h"
 #include "BrightEntity.h"
 #include "BrightEvent.h"
+#include "BrightTimer.h"
 
 /// <summary>
 /// Responsible for spawning objects every given interval.
@@ -11,12 +11,13 @@ template<class T>
 class BrightSpawner : public BrightEntity
 {
 public:
+	//events
 	BrightEvent<T&> onSpawn;
 
+	//constructor
 	BrightSpawner(size_t poolSize, float spawnInterval) 
 		: pool(poolSize), 
-		spawnTimer(0.0f),
-		spawnInterval(spawnInterval) {}
+		spawnTimer(spawnInterval) {}
 
 	void update(float dt) 
 	{
@@ -25,13 +26,12 @@ public:
 			return;
 		}
 
-		spawnTimer += dt;
-		if (spawnTimer >= spawnInterval)
+		if (spawnTimer.update(dt))
 		{
 			T& spawned = pool.getAvailable();
 			spawned.active = true;
 			onSpawn.fire(spawned);
-			spawnTimer = 0.0f;
+			spawnTimer.reset();
 		}
 	}
 
@@ -46,9 +46,8 @@ public:
 
 	//todo: temp, should be private
 	BrightPool<T> pool;
-private:
 
-	float spawnTimer;
-	float spawnInterval;
+private:
+	BrightTimer spawnTimer;
 };
 
