@@ -8,7 +8,7 @@ class Ship
 {
 public: 
 	//events
-	BrightEvent<> onReachScreenEdge;
+	BrightEvent<> onShoot;
 
 	//members
 	sf::Vector2f position;
@@ -32,6 +32,10 @@ public:
 
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f);
+
+	const sf::Vector2f getFrontPoint();
+
+	const sf::Vector2f getForwardVector();
 
 private:
 

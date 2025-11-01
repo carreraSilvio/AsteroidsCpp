@@ -5,13 +5,16 @@
 
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     ship(50.0f, 50.0f),
-    fruit(50.0f, 0.0f)
+    fruit(50.0f, 0.0f),
+    bullet(0.0f, 0.0f)
 {
+    bullet.active = false;
+
     //UI
     scoreView = Services::Views().addView<ScoreView>();
 
     //hook up events
-    ship.onReachScreenEdge.subscribe([this]() { handleSnakeReachScreenEdge(); });
+    ship.onShoot.subscribe([this]() { handlePlayerShoot(); });
 }
 
 void Play_GameState::enter()
@@ -35,6 +38,7 @@ std::type_index Play_GameState::update(float dt)
     {
         ship.update(dt);
         fruit.update(dt);
+        bullet.update(dt);
 
         /*
         //check collision with fruit
@@ -65,7 +69,6 @@ std::type_index Play_GameState::update(float dt)
     }
     else if (subState == GameState::PlayerAteFruit)
     {
-        //snake.grow();
         playerScore++;
         scoreView->setScore(playerScore);
 
@@ -114,13 +117,17 @@ void Play_GameState::draw(sf::RenderWindow& window)
 {
     ship.draw(window);
     fruit.draw(window);
+    bullet.draw(window);
 
     scoreView->draw(window);
 }
 
-void Play_GameState::handleSnakeReachScreenEdge()
+void Play_GameState::handlePlayerShoot()
 {
-    //subState = GameState::PlayerDied;
+
+    bullet.setPosition(ship.getFrontPoint());
+    bullet.direction = ship.getForwardVector();
+    bullet.active = true;
 }
 
 sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)
@@ -128,26 +135,30 @@ sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)
     sf::Vector2f pos;
     bool collision;
 
-    int gridWidth = GameConstants::WINDOW_WIDTH / GameConstants::SNAKE_PIECE_SIZE;
-    int gridHeight = GameConstants::WINDOW_HEIGHT / GameConstants::SNAKE_PIECE_SIZE;
+    int gridWidth = GameConstants::WINDOW_WIDTH / GameConstants::PLAYER_SHIP_SIZE;
+    int gridHeight = GameConstants::WINDOW_HEIGHT / GameConstants::PLAYER_SHIP_SIZE;
+
+    const float tolernace = 0.05f;
 
     do 
     {
         collision = false;
         int cellX = rand() % gridWidth;
         int cellY = rand() % gridHeight;
-        pos.x = cellX * GameConstants::SNAKE_PIECE_SIZE;
-        pos.y = cellY * GameConstants::SNAKE_PIECE_SIZE;
+        pos.x = cellX * GameConstants::PLAYER_SHIP_SIZE;
+        pos.y = cellY * GameConstants::PLAYER_SHIP_SIZE;
 
-        /*
-        for (const auto& piece : snake.pieces) {
-            if (piece.position == pos) {
-                collision = true;
-                break;
-            }
+        float distanceX = ship.position.x - pos.x;
+        float distanceY = ship.position.y - pos.y;
+        if (distanceX < 0) distanceX *= -1;
+        if (distanceY < 0) distanceY *= -1;
+
+        if (distanceX < tolernace && distanceY < tolernace)
+        {
+            collision = true;
+            break;
         }
-        */
-
+        
     } while (collision);
 
     return pos;

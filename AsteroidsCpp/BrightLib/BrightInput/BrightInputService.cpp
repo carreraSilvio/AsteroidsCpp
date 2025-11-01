@@ -1,4 +1,5 @@
 #include "BrightInputService.h"
+#include <iostream>
 
 BrightInputService::BrightInputService()
 {
@@ -22,7 +23,12 @@ bool BrightInputService::isButtonPressed(BrightActionButton action)
 {
     auto it = actionToKeys.find(action);
     if (it == actionToKeys.end())
+    {
+        //tbd std::cerr << "[Warning] Input: action button " << action  << " not mapped.";
+        //std::cerr << "[Warning] Input: action button not mapped.";
+        //OutputDebugStringA(("[Warning] Input: action button not mapped.").c_str());
         return false;
+    }
 
     for (sf::Keyboard::Key key : it->second)
     {

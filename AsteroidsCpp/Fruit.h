@@ -2,14 +2,11 @@
 #define FRUIT_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
 #include "BrightLib/BrightEvent.h"
 
 class Fruit
 {
 public:
-	//events
-
 	//members
 	float startX, startY;
 	sf::Vector2f position;

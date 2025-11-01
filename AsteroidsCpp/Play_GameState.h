@@ -4,20 +4,11 @@
 #include "Ship.h"
 #include "Fruit.h"
 #include "ScoreView.h"
+#include "Bullet.h"
 
 class Play_GameState : public BrightState
 {
 public:
-	unsigned int playerScore = 0;
-	Ship ship;
-	Fruit fruit;
-
-	float playerAteFruitTimer = 0.0f;
-	float playerDiedTimer = 0.0f;
-
-	//UI
-	ScoreView* scoreView;
-
 	Play_GameState();
 	void enter();
 	std::type_index update(float);
@@ -34,7 +25,18 @@ private:
 	};
 	GameState subState = GameState::Playing;
 
-	void handleSnakeReachScreenEdge();
+	Ship ship;
+	Fruit fruit;
+	Bullet bullet;
+
+	unsigned int playerScore = 0;
+	float playerAteFruitTimer = 0.0f;
+	float playerDiedTimer = 0.0f;
+
+	//UI
+	ScoreView* scoreView;
+
+	void handlePlayerShoot();
 
 	sf::Vector2f getRandomFreePosition(const Ship& ship);
 };

@@ -37,7 +37,7 @@ void Ship::update(float dt)
 	}
 
 	// thrust (booster)
-	if (Services::Input().isButtonPressed(BrightActionButton::THRUST_FORWARD))
+	if (Services::Input().isButtonPressed(BrightActionButton::THRUST))
 	{
 		float rad = rotation.asRadians();
 		sf::Vector2f forward(std::cos(rad), std::sin(rad));
@@ -50,22 +50,11 @@ void Ship::update(float dt)
 	setPosition(position);
 	shape.setRotation(rotation);
 
-	//fire events
-	if (position.x < 0) 
+
+	//shoot
+	if (Services::Input().isButtonPressed(BrightActionButton::SHOOT))
 	{
-		onReachScreenEdge.fire();
-	}
-	else if (position.x >= GameConstants::WINDOW_WIDTH)
-	{
-		onReachScreenEdge.fire();
-	}
-	else if (position.y < 0)
-	{
-		onReachScreenEdge.fire();
-	}
-	else if (position.y >= GameConstants::WINDOW_HEIGHT)
-	{
-		onReachScreenEdge.fire();
+		onShoot.fire();
 	}
 }
 
@@ -83,4 +72,15 @@ void Ship::setPosition(sf::Vector2f position)
 {
 	this->position = position;
 	shape.setPosition(position);
+}
+
+const sf::Vector2f Ship::getFrontPoint()
+{
+	return shape.getTransform().transformPoint(shape.getPoint(0));
+}
+
+const sf::Vector2f Ship::getForwardVector()
+{
+	float rad = rotation.asRadians();
+	return sf::Vector2f(std::cos(rad), std::sin(rad));
 }

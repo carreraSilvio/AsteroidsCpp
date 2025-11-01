@@ -13,7 +13,7 @@ namespace GameConstants
 		return sf::Vector2f(WINDOW_WIDTH / 2.0f, WINDOW_HEIGHT / 2.0f);
 	}
 
-	inline static constexpr float SNAKE_PIECE_SIZE = 20.0f;
+	inline static constexpr float PLAYER_SHIP_SIZE = 20.0f;
 
 	inline static constexpr float BALL_SPEED = 300.0f;
 

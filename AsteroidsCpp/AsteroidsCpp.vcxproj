@@ -149,11 +149,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BrightLib\BrightEntity.cpp" />
     <ClCompile Include="BrightLib\BrightFSM.cpp" />
     <ClCompile Include="BrightLib\BrightInput\BrightInputService.cpp" />
     <ClCompile Include="BrightLib\BrightState.cpp" />
     <ClCompile Include="BrightLib\BrightUI\BrightView.cpp" />
     <ClCompile Include="BrightLib\BrightUI\BrightViewManager.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Fruit.cpp" />
     <ClCompile Include="HighscoreService.cpp" />
     <ClCompile Include="main.cpp" />
@@ -165,6 +167,7 @@
     <ClCompile Include="Title_GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BrightLib\BrightEntity.h" />
     <ClInclude Include="BrightLib\BrightEvent.h" />
     <ClInclude Include="BrightLib\BrightFSM.h" />
     <ClInclude Include="BrightLib\BrightInput\BrightInputService.h" />
@@ -173,6 +176,7 @@
     <ClInclude Include="BrightLib\BrightUI\BrightView.h" />
     <ClInclude Include="BrightLib\BrightUI\BrightViewManager.h" />
     <ClInclude Include="BrightLib\CollisionManager.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Fruit.h" />
     <ClInclude Include="GameConstants.h" />
     <ClInclude Include="HighscoreService.h" />
