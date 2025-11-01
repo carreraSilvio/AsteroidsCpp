@@ -5,7 +5,7 @@
 
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     ship(50.0f, 50.0f),
-    fruit(50.0f, 0.0f),
+    asteroid(50.0f, 0.0f),
     bullets(20)
 {
 
@@ -22,7 +22,7 @@ void Play_GameState::enter()
     float windowCenterY = GameConstants::WINDOW_HEIGHT / 2.0f;
 
     ship.setPosition(windowCenterX, windowCenterY);
-    fruit.setPosition(windowCenterX, windowCenterY - 50.0f);
+    asteroid.setPosition(windowCenterX/2.0f, windowCenterY/2.0f);
 
     playerAteFruitTimer = 0.0f;
     playerDiedTimer = 0.0f;
@@ -36,7 +36,7 @@ std::type_index Play_GameState::update(float dt)
     if (subState == GameState::Playing)
     {
         ship.update(dt);
-        fruit.update(dt);
+        asteroid.update(dt);
 
 
         //temporary
@@ -89,7 +89,7 @@ std::type_index Play_GameState::update(float dt)
         playerAteFruitTimer += dt;
         if (playerAteFruitTimer > 0.1f)
         {
-            fruit.setPosition(getRandomFreePosition(ship));
+            asteroid.setPosition(getRandomFreePosition(ship));
 
             subState = GameState::Playing;
         }
@@ -112,7 +112,7 @@ std::type_index Play_GameState::update(float dt)
             scoreView->setHighscore(Services::Highscore().getHighscore());
             Services::Highscore().save();
 
-            fruit.setPosition(getRandomFreePosition(ship));
+            asteroid.setPosition(getRandomFreePosition(ship));
             ship.resetPosition();
 
             subState = GameState::Playing;
@@ -125,7 +125,7 @@ std::type_index Play_GameState::update(float dt)
 void Play_GameState::draw(sf::RenderWindow& window)
 {
     ship.draw(window);
-    fruit.draw(window);
+    asteroid.draw(window);
 
     //temporary
     for (Bullet& bullet : bullets.getAll())

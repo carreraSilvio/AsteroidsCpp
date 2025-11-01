@@ -50,7 +50,7 @@
     <ClCompile Include="BrightLib\BrightInput\BrightInputService.cpp">
       <Filter>BrightLib\BrightInput</Filter>
     </ClCompile>
-    <ClCompile Include="Fruit.cpp">
+    <ClCompile Include="Asteroid.cpp">
       <Filter>Source Files\Entitites</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
@@ -109,7 +109,7 @@
     <ClInclude Include="BrightLib\BrightInput\BrightInputService.h">
       <Filter>BrightLib\BrightInput</Filter>
     </ClInclude>
-    <ClInclude Include="Fruit.h">
+    <ClInclude Include="Asteroid.h">
       <Filter>Source Files\Entitites</Filter>
     </ClInclude>
     <ClInclude Include="Ship.h">

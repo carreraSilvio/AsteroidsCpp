@@ -3,7 +3,7 @@
 #include "BrightLib/BrightState.h"
 #include "BrightLib/BrightPool.h"
 #include "Ship.h"
-#include "Fruit.h"
+#include "Asteroid.h"
 #include "ScoreView.h"
 #include "Bullet.h"
 
@@ -27,7 +27,7 @@ private:
 	GameState subState = GameState::Playing;
 
 	Ship ship;
-	Fruit fruit;
+	Asteroid asteroid;
 	BrightPool<Bullet> bullets;
 
 	unsigned int playerScore = 0;
