@@ -1,6 +1,4 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "BrightEntity.h"
 
 /// <summary>
 /// Responsible for managing an array entities to allow them to be easily reused.
