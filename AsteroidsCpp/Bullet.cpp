@@ -3,7 +3,7 @@
 Bullet::Bullet(float x, float y) : BrightEntity()
 {
 	position = { x, y };
-	speed =  300.0f;
+	speed = 300.0f;
 
 	shape.setRadius(5);
 	shape.setFillColor(sf::Color::Blue);
@@ -20,6 +20,13 @@ void Bullet::update(float dt)
 	position += speed * direction *  dt;
 
 	shape.setPosition(position);
+
+	lifetimeTimer += dt;
+	if (lifetimeTimer > lifetimeDuration)
+	{
+		lifetimeTimer = 0.0f;
+		active = false;
+	}
 }
 
 void Bullet::draw(sf::RenderWindow& window)

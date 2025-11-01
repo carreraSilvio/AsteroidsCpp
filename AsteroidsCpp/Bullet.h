@@ -10,11 +10,17 @@ public:
 	sf::Vector2f direction;
 	sf::CircleShape shape;
 
+	float lifetimeTimer;
+
 	//functions
 	Bullet(float x, float y);
+	Bullet() : Bullet(0, 0) {};
 	void update(float deltaTime);
 	void draw(sf::RenderWindow& window);
 
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f);
+
+private:
+	const float lifetimeDuration = 0.3f;
 };

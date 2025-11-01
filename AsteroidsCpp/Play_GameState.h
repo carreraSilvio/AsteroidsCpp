@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BrightLib/BrightState.h"
+#include "BrightLib/BrightPool.h"
 #include "Ship.h"
 #include "Fruit.h"
 #include "ScoreView.h"
@@ -27,7 +28,7 @@ private:
 
 	Ship ship;
 	Fruit fruit;
-	Bullet bullet;
+	BrightPool<Bullet> bullets;
 
 	unsigned int playerScore = 0;
 	float playerAteFruitTimer = 0.0f;

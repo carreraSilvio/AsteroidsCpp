@@ -139,6 +139,9 @@
     <ClInclude Include="BrightLib\BrightEntity.h">
       <Filter>BrightLib</Filter>
     </ClInclude>
+    <ClInclude Include="BrightLib\BrightPool.h">
+      <Filter>BrightLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\arial.ttf">

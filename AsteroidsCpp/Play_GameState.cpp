@@ -6,9 +6,8 @@
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     ship(50.0f, 50.0f),
     fruit(50.0f, 0.0f),
-    bullet(0.0f, 0.0f)
+    bullets(20)
 {
-    bullet.active = false;
 
     //UI
     scoreView = Services::Views().addView<ScoreView>();
@@ -38,7 +37,17 @@ std::type_index Play_GameState::update(float dt)
     {
         ship.update(dt);
         fruit.update(dt);
-        bullet.update(dt);
+
+
+        //temporary
+        for (Bullet& bullet : bullets.getAll())
+        {
+            if (!bullet.active)
+            {
+                continue;
+            }
+            bullet.update(dt);
+        }
 
         /*
         //check collision with fruit
@@ -117,14 +126,19 @@ void Play_GameState::draw(sf::RenderWindow& window)
 {
     ship.draw(window);
     fruit.draw(window);
-    bullet.draw(window);
+
+    //temporary
+    for (Bullet& bullet : bullets.getAll())
+    {
+        bullet.draw(window);
+    }
 
     scoreView->draw(window);
 }
 
 void Play_GameState::handlePlayerShoot()
 {
-
+    Bullet& bullet = bullets.getAvailable();
     bullet.setPosition(ship.getFrontPoint());
     bullet.direction = ship.getForwardVector();
     bullet.active = true;
