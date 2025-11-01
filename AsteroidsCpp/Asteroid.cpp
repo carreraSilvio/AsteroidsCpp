@@ -5,7 +5,7 @@
 Asteroid::Asteroid(float x, float y) 
 	: BrightEntity(),
 	speed(100.0f),
-	direction(1.0f,0.5f),
+	direction(0.0f,0.0f),
 	radius(50.0f)
 {
 	position = {x, y};

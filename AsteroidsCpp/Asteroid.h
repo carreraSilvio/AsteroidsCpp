@@ -17,6 +17,7 @@ public:
 
 	//functions
 	Asteroid(float x, float y);
+	Asteroid() : Asteroid(0, 0) {};
 	void update(float dt);
 	void draw(sf::RenderWindow& window);
 	

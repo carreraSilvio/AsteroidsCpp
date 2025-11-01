@@ -2,6 +2,7 @@
 
 #include "BrightLib/BrightState.h"
 #include "BrightLib/BrightPool.h"
+#include "BrightLib/BrightSpawner.h"
 #include "Ship.h"
 #include "Asteroid.h"
 #include "ScoreView.h"
@@ -27,7 +28,7 @@ private:
 	GameState subState = GameState::Playing;
 
 	Ship ship;
-	Asteroid asteroid;
+	BrightSpawner<Asteroid> asteroidSpawner;
 	BrightPool<Bullet> bullets;
 
 	unsigned int playerScore = 0;
@@ -36,8 +37,9 @@ private:
 
 	//UI
 	ScoreView* scoreView;
-
+	//event handlers
 	void handlePlayerShoot();
+	void handleAsteroidSpawn(Asteroid& asteroid);
 
 	sf::Vector2f getRandomFreePosition(const Ship& ship);
 };

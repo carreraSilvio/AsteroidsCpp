@@ -2,10 +2,11 @@
 #include "GameConstants.h"
 #include "BrightLib/CollisionManager.h"
 #include "Services.h"
+#include "BrightLib/BrightRandom.h"
 
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     ship(50.0f, 50.0f),
-    asteroid(50.0f, 0.0f),
+    asteroidSpawner(20, 2.3f),
     bullets(20)
 {
 
@@ -14,6 +15,7 @@ Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
 
     //hook up events
     ship.onShoot.subscribe([this]() { handlePlayerShoot(); });
+    asteroidSpawner.onSpawn.subscribe([this](Asteroid& asteroid) { handleAsteroidSpawn(asteroid); });
 }
 
 void Play_GameState::enter()
@@ -22,7 +24,10 @@ void Play_GameState::enter()
     float windowCenterY = GameConstants::WINDOW_HEIGHT / 2.0f;
 
     ship.setPosition(windowCenterX, windowCenterY);
-    asteroid.setPosition(windowCenterX/2.0f, windowCenterY/2.0f);
+
+    asteroidSpawner.position = { -5.0f, -5.0f};
+    //asteroidSpawner.position = { windowCenterX / 2.0f, windowCenterY / 2.0f };
+    //asteroid.setPosition(windowCenterX/2.0f, windowCenterY/2.0f);
 
     playerAteFruitTimer = 0.0f;
     playerDiedTimer = 0.0f;
@@ -36,10 +41,19 @@ std::type_index Play_GameState::update(float dt)
     if (subState == GameState::Playing)
     {
         ship.update(dt);
-        asteroid.update(dt);
+        asteroidSpawner.update(dt);
 
+        //todo: temporary, remove it
+        for (Asteroid& asteroid : asteroidSpawner.pool.getAll())
+        {
+            if (!asteroid.active)
+            {
+                continue;
+            }
+            asteroid.update(dt);
+        }
 
-        //temporary
+        //todo: temporary, remove it
         for (Bullet& bullet : bullets.getAll())
         {
             if (!bullet.active)
@@ -76,29 +90,11 @@ std::type_index Play_GameState::update(float dt)
         */
 
     }
-    else if (subState == GameState::PlayerAteFruit)
-    {
-        playerScore++;
-        scoreView->setScore(playerScore);
-
-        playerAteFruitTimer = 0.0f;
-        subState = GameState::DelayAfterEatingFruit;
-    }
-    else if (subState == GameState::DelayAfterEatingFruit)
-    {
-        playerAteFruitTimer += dt;
-        if (playerAteFruitTimer > 0.1f)
-        {
-            asteroid.setPosition(getRandomFreePosition(ship));
-
-            subState = GameState::Playing;
-        }
-    }
     else if (subState == GameState::PlayerDied)
     {
-
         playerDiedTimer = 0.0f;
         //playsfx?
+        
         subState = GameState::DelayAfterPlayerDied;
     }
     else if (subState == GameState::DelayAfterPlayerDied)
@@ -106,13 +102,16 @@ std::type_index Play_GameState::update(float dt)
         playerDiedTimer += dt;
         if (playerDiedTimer > 0.2f)
         {
+            //save
             Services::Highscore().tryUpdateHighscore(playerScore);
             playerScore = 0;
             scoreView->setScore(playerScore);
             scoreView->setHighscore(Services::Highscore().getHighscore());
             Services::Highscore().save();
 
-            asteroid.setPosition(getRandomFreePosition(ship));
+            //reset
+            asteroidSpawner.despawnAll();
+            //asteroid.setPosition(getRandomFreePosition(ship));
             ship.resetPosition();
 
             subState = GameState::Playing;
@@ -125,9 +124,14 @@ std::type_index Play_GameState::update(float dt)
 void Play_GameState::draw(sf::RenderWindow& window)
 {
     ship.draw(window);
-    asteroid.draw(window);
 
-    //temporary
+    //todo: temporary, remove it
+    for (Asteroid& asteroid : asteroidSpawner.pool.getAll())
+    {
+        asteroid.draw(window);
+    }
+
+    //todo: temporary, remove it
     for (Bullet& bullet : bullets.getAll())
     {
         bullet.draw(window);
@@ -143,6 +147,27 @@ void Play_GameState::handlePlayerShoot()
     bullet.direction = ship.getForwardVector();
     bullet.active = true;
 }
+
+void Play_GameState::handleAsteroidSpawn(Asteroid& asteroid)
+{
+    //set position
+    asteroid.position = { asteroidSpawner.position.x, asteroidSpawner.position.y };
+
+    //set direction
+    sf::Vector2f dir = sf::Vector2f{GameConstants::WINDOW_WIDTH / 2.0f, GameConstants::WINDOW_HEIGHT / 2.0f} - asteroid.position;
+    float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+    sf::Vector2f normalizedDirection = (len != 0) ? dir / len : sf::Vector2f{ 0.f, 0.f };
+    asteroid.direction = normalizedDirection;
+
+    //set size
+    float small = 20.0f;
+    float medium = 30.0f;
+    float large = 50.0f;
+    float range = BrightRandom::range(0, 100);
+    float size = range < 50 ? small : medium;
+    size = range < 80 ? medium : large;
+    asteroid.shape.setRadius(size);
+}   
 
 sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)
 {
