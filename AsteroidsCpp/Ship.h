@@ -1,26 +1,24 @@
-#ifndef SHIP_H
-#define SHIP_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
+#include "BrightLib/BrightEntity.h"
 #include "BrightLib/BrightEvent.h"
+#include "BrightLib/BrightTimer.h"
 
-class Ship
+class Ship : public BrightEntity
 {
 public: 
 	//events
 	BrightEvent<> onShoot;
 
 	//members
-	sf::Vector2f position;
 	sf::Vector2f velocity;
 	sf::Angle rotation;
 
 	float thrust;
 	float linerDamping;
-	/// <summary>
-	/// degrees per second
-	/// </summary>
-	const sf::Angle rotationSpeed = sf::degrees(180.f);
+	
+	const sf::Angle rotationSpeed = sf::degrees(180.f);//degrees per second
 
 	sf::ConvexShape shape;
 
@@ -34,12 +32,9 @@ public:
 	void setPosition(sf::Vector2f);
 
 	const sf::Vector2f getFrontPoint();
-
 	const sf::Vector2f getForwardVector();
 
 private:
-	float shootTimer;
-	float shootInterval;
+	BrightTimer shootTimer;
+	inline static constexpr float SHOOT_INTERVAL = 0.3f;
 };
-
-#endif // SHIP_H

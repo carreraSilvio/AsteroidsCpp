@@ -11,7 +11,6 @@ Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     playerScore(0),
     restartGameTimer(0.3f)
 {
-
     //UI
     scoreView = Services::Views().addView<ScoreView>();
 
