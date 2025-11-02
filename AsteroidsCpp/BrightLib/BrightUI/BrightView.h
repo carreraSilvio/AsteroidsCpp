@@ -4,9 +4,6 @@
 
 class BrightView
 {
-protected:
-	const std::type_index typeId;
-
 public:
 	BrightView(const std::type_index& t) : typeId(t) {}
 
@@ -14,6 +11,12 @@ public:
 
 	virtual void open();
 	virtual void update(float);
-	virtual void draw(sf::RenderWindow&);
+	void draw(sf::RenderWindow&);
 	virtual void close();
+
+	sf::Text& addText();
+
+protected:
+	const std::type_index typeId;
+	std::list<sf::Text> texts;
 };

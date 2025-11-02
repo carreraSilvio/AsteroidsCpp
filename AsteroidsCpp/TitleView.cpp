@@ -4,22 +4,27 @@
 #include "GameConstants.h"
 
 TitleView::TitleView() : BrightView(typeid(TitleView)),
-    scorePlayer1(BrightViewManager::DEFAULT_FONT),
-    pressStart(BrightViewManager::DEFAULT_FONT)
+    gameTitle(addText()),
+    pressStart(addText()),
+    credits(addText())
 {
-    scorePlayer1.setString("BRIGHT SNAKE");
-    scorePlayer1.setCharacterSize(BrightViewManager::DEFAULT_FONT_SIZE * 2);
-    scorePlayer1.setFillColor(sf::Color::White);
-    scorePlayer1.setPosition(sf::Vector2f(GameConstants::WindowHalfSize().x - (scorePlayer1.getLocalBounds().size.x / 2.0f), 200.0f));
+    gameTitle.setString("ASTEROIDS");
+    gameTitle.setCharacterSize(BrightViewManager::DEFAULT_FONT_SIZE_LARGE * 2);
+    gameTitle.setPosition({ 
+        GameConstants::WindowHalfSize().x - (gameTitle.getLocalBounds().size.x / 2.0f), 
+        GameConstants::WindowHalfSize().y - 100.0f
+        });
 
     pressStart.setString("[PRESS ENTER]");
-    pressStart.setCharacterSize(BrightViewManager::DEFAULT_FONT_SIZE);
-    pressStart.setFillColor(sf::Color::White);
-    pressStart.setPosition(sf::Vector2f(GameConstants::WindowHalfSize().x - (pressStart.getLocalBounds().size.x/2.0f), GameConstants::WindowHalfSize().y));
-}
+    pressStart.setPosition({ 
+        GameConstants::WindowHalfSize().x - (pressStart.getLocalBounds().size.x / 2.0f),
+        GameConstants::WindowHalfSize().y 
+        });
 
-void TitleView::draw(sf::RenderWindow& window)
-{
-    window.draw(scorePlayer1);
-    window.draw(pressStart);
+    credits.setString("brightflask - 2025");
+    credits.setCharacterSize(BrightViewManager::DEFAULT_FONT_SIZE_SMALL * 0.75f);
+    credits.setPosition({ 
+        GameConstants::WindowHalfSize().x - (credits.getLocalBounds().size.x / 2.0f), 
+        GameConstants::WINDOW_HEIGHT - credits.getLocalBounds().size.y - 10
+        });
 }

@@ -11,7 +11,9 @@ private:
 	inline static const std::string DEFAULT_FONT_PATH = "resources/arial.ttf";
 
 public:
-	inline static unsigned int DEFAULT_FONT_SIZE = 24;
+	inline static unsigned int DEFAULT_FONT_SIZE_SMALL = 18;  // for HUD labels, button text, minor info
+	inline static unsigned int DEFAULT_FONT_SIZE_MEDIUM = 24; // for standard UI text, menus, scores
+	inline static unsigned int DEFAULT_FONT_SIZE_LARGE = 32;  // for titles, headers, or emphasis
 	inline static sf::Font DEFAULT_FONT;
 
 	BrightViewManager();

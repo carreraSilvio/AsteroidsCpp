@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -18,22 +14,26 @@
     <Filter Include="BrightLib\BrightInput">
       <UniqueIdentifier>{35687486-ed87-4a19-a076-397b4982388e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Entitites">
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source\Entitites">
       <UniqueIdentifier>{a793dacd-f86a-4ccf-a0c4-d4637349410b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Services">
+    <Filter Include="Source\Services">
       <UniqueIdentifier>{0347a49b-4bba-463c-8fc5-2de11dcd848b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameFSM">
+    <Filter Include="Source\Flow">
       <UniqueIdentifier>{e5db517d-04ca-4e3c-96db-c050e6f4ee5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameUI">
+    <Filter Include="Source\UI">
       <UniqueIdentifier>{fe6d37e2-dbf6-4aa7-8f0c-78e6809874b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="BrightLib\BrightFSM.cpp">
       <Filter>BrightLib</Filter>
@@ -51,31 +51,31 @@
       <Filter>BrightLib\BrightInput</Filter>
     </ClCompile>
     <ClCompile Include="Asteroid.cpp">
-      <Filter>Source Files\Entitites</Filter>
+      <Filter>Source\Entitites</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
-      <Filter>Source Files\Entitites</Filter>
+      <Filter>Source\Entitites</Filter>
     </ClCompile>
     <ClCompile Include="HighscoreService.cpp">
-      <Filter>Source Files\Services</Filter>
+      <Filter>Source\Services</Filter>
     </ClCompile>
     <ClCompile Include="Play_GameState.cpp">
-      <Filter>Source Files\GameFSM</Filter>
+      <Filter>Source\Flow</Filter>
     </ClCompile>
     <ClCompile Include="Title_GameState.cpp">
-      <Filter>Source Files\GameFSM</Filter>
+      <Filter>Source\Flow</Filter>
     </ClCompile>
     <ClCompile Include="ScoreView.cpp">
-      <Filter>Source Files\GameUI</Filter>
+      <Filter>Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="TitleView.cpp">
-      <Filter>Source Files\GameUI</Filter>
+      <Filter>Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="Services.cpp">
-      <Filter>Source Files\Services</Filter>
+      <Filter>Source\Services</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files\Entitites</Filter>
+      <Filter>Source\Entitites</Filter>
     </ClCompile>
     <ClCompile Include="BrightLib\BrightEntity.cpp">
       <Filter>BrightLib</Filter>
@@ -83,7 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameConstants.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="BrightLib\BrightEvent.h">
       <Filter>BrightLib</Filter>
@@ -110,31 +110,31 @@
       <Filter>BrightLib\BrightInput</Filter>
     </ClInclude>
     <ClInclude Include="Asteroid.h">
-      <Filter>Source Files\Entitites</Filter>
+      <Filter>Source\Entitites</Filter>
     </ClInclude>
     <ClInclude Include="Ship.h">
-      <Filter>Source Files\Entitites</Filter>
+      <Filter>Source\Entitites</Filter>
     </ClInclude>
     <ClInclude Include="HighscoreService.h">
-      <Filter>Source Files\Services</Filter>
+      <Filter>Source\Services</Filter>
     </ClInclude>
     <ClInclude Include="Play_GameState.h">
-      <Filter>Source Files\GameFSM</Filter>
+      <Filter>Source\Flow</Filter>
     </ClInclude>
     <ClInclude Include="Title_GameState.h">
-      <Filter>Source Files\GameFSM</Filter>
+      <Filter>Source\Flow</Filter>
     </ClInclude>
     <ClInclude Include="ScoreView.h">
-      <Filter>Source Files\GameUI</Filter>
+      <Filter>Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="TitleView.h">
-      <Filter>Source Files\GameUI</Filter>
+      <Filter>Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="Services.h">
-      <Filter>Source Files\Services</Filter>
+      <Filter>Source\Services</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Source Files\Entitites</Filter>
+      <Filter>Source\Entitites</Filter>
     </ClInclude>
     <ClInclude Include="BrightLib\BrightEntity.h">
       <Filter>BrightLib</Filter>

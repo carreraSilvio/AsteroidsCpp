@@ -8,12 +8,11 @@ class TitleView : public BrightView
 {
 public:
 
-	sf::Text scorePlayer1;
-	sf::Text pressStart;
+	sf::Text& gameTitle;
+	sf::Text& pressStart;
+	sf::Text& credits;
 
 	TitleView();
-
-	void draw(sf::RenderWindow& window);
 };
 
 #endif // TITLEVIEW_H
