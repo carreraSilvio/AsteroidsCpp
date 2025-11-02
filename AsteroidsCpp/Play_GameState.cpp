@@ -7,7 +7,9 @@
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     ship(50.0f, 50.0f),
     asteroidSpawner(20, 2.3f),
-    bullets(20)
+    bullets(20),
+    playerScore(0),
+    restartGameTimer(0.3f)
 {
 
     //UI
@@ -29,8 +31,7 @@ void Play_GameState::enter()
     //asteroidSpawner.position = { windowCenterX / 2.0f, windowCenterY / 2.0f };
     //asteroid.setPosition(windowCenterX/2.0f, windowCenterY/2.0f);
 
-    playerAteFruitTimer = 0.0f;
-    playerDiedTimer = 0.0f;
+    restartGameTimer.reset();
 
     scoreView->setScore(0);
     scoreView->setHighscore(Services::Highscore().getHighscore());
@@ -63,7 +64,6 @@ std::type_index Play_GameState::update(float dt)
             bullet.update(dt);
         }
 
-       
         //collision between asteroids and ship
         for (Asteroid& asteroid : asteroidSpawner.pool.getAll())
         {
@@ -101,15 +101,13 @@ std::type_index Play_GameState::update(float dt)
     }
     else if (subState == GameState::PlayerDead)
     {
-        playerDiedTimer = 0.0f;
         //playsfx?
-        
-        subState = GameState::DelayAfterPlayerDead;
+        restartGameTimer.reset();
+        subState = GameState::RestartingGame;
     }
-    else if (subState == GameState::DelayAfterPlayerDead)
+    else if (subState == GameState::RestartingGame)
     {
-        playerDiedTimer += dt;
-        if (playerDiedTimer > 0.2f)
+        if (restartGameTimer.update(dt))
         {
             //save
             Services::Highscore().updateHighscore(playerScore);
@@ -176,6 +174,9 @@ void Play_GameState::handleAsteroidSpawn(Asteroid& asteroid)
     float size = range < 50 ? small : medium;
     size = range < 80 ? medium : large;
     asteroid.shape.setRadius(size);
+
+    //set speed
+    //asteroid.setRandomSpeed();
 }   
 
 sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)

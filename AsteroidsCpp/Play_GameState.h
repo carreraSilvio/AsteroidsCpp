@@ -21,7 +21,7 @@ private:
 	{
 		Playing,
 		PlayerDead,
-		DelayAfterPlayerDead,
+		RestartingGame,
 	};
 	GameState subState = GameState::Playing;
 
@@ -30,8 +30,7 @@ private:
 	BrightPool<Bullet> bullets;
 
 	unsigned int playerScore = 0;
-	float playerAteFruitTimer = 0.0f;
-	float playerDiedTimer = 0.0f;
+	BrightTimer restartGameTimer;
 
 	//UI
 	ScoreView* scoreView;

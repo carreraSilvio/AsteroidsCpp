@@ -5,10 +5,10 @@
 Ship::Ship(float x, float y) 
 	: thrust(200.0f),
 	shootTimer(0.0f),
-	shootInterval(0.3f)
+	shootInterval(0.3f),
+	linerDamping(0.75f)
 {
 	rotation = sf::degrees(0.0f);
-	linerDamping = 0.75f;
 
 	shape.setPointCount(3);
 	shape.setPoint(0, { 20.f, 0.f });
@@ -22,8 +22,7 @@ Ship::Ship(float x, float y)
 void Ship::resetPosition()
 {
 	rotation = sf::degrees(0.0f);
-
-	//reset position
+	velocity = {0.0f, 0.0f};
 	setPosition(GameConstants::WINDOW_WIDTH / 2, GameConstants::WINDOW_HEIGHT / 2);
 }
 
