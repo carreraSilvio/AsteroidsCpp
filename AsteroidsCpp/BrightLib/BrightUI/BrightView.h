@@ -12,7 +12,7 @@ public:
 	virtual void open();
 	virtual void update(float);
 	void draw(sf::RenderWindow&);
-	virtual void close();
+	virtual void close(); //todo: add event so the manager gets notified when we close directly
 
 	sf::Text& addText();
 

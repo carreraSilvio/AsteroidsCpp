@@ -16,11 +16,11 @@ public:
 	}
 
 	/// <summary>
-	/// Retuns an entity that's available to be used. Available means the entity is not active.
+	/// Gets an entity available to be used. For now: Available means the entity is not active.
 	/// </summary>
 	T& getAvailable()
 	{
-		for (int i = 0; i < poolSize; i++)
+		for (size_t i = 0; i < poolSize; i++)
 		{
 			if (!entities[i].active)
 			{
@@ -35,6 +35,14 @@ public:
 	std::vector<T>& getAll()
 	{
 		return entities;
+	}
+	
+	void deactivateAll()
+	{
+		for (size_t i = 0; i < poolSize; i++)
+		{
+			entities[i].active = false;
+		}
 	}
 
 private:

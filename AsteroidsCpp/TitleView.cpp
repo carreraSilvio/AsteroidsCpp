@@ -6,7 +6,8 @@
 TitleView::TitleView() : BrightView(typeid(TitleView)),
     gameTitle(addText()),
     pressStart(addText()),
-    credits(addText())
+    credits(addText()),
+    blinkTimer(0.3f)
 {
     gameTitle.setString("ASTEROIDS");
     gameTitle.setCharacterSize(BrightViewManager::DEFAULT_FONT_SIZE_LARGE * 2);
@@ -27,4 +28,15 @@ TitleView::TitleView() : BrightView(typeid(TitleView)),
         GameConstants::WindowHalfSize().x - (credits.getLocalBounds().size.x / 2.0f), 
         GameConstants::WINDOW_HEIGHT - credits.getLocalBounds().size.y - 10
         });
+}
+
+void TitleView::update(float dt)
+{
+    if (blinkTimer.update(dt))
+    {
+        blinkTimer.reset();
+        pressStart.setFillColor(pressStart.getFillColor().a == 0 ?
+            sf::Color::White : 
+            sf::Color::Transparent);
+    }
 }

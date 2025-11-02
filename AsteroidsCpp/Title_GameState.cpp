@@ -11,6 +11,13 @@ Title_GameState::Title_GameState() : BrightState(typeid(Title_GameState))
 
 void Title_GameState::enter()
 {
+    Services::Views().openView<TitleView>();
+}
+
+void Title_GameState::exit()
+{
+    Services::Views().closeView<TitleView>();
+    //titleView->close();
 }
 
 std::type_index Title_GameState::update(float)
@@ -22,9 +29,4 @@ std::type_index Title_GameState::update(float)
     }
 
     return getTypeId();
-}
-
-void Title_GameState::draw(sf::RenderWindow& window)
-{
-    titleView->draw(window);
 }

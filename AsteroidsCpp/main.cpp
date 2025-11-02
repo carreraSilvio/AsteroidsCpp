@@ -44,6 +44,7 @@ int main()
         //DRAW
         window.clear();
         gameFsm.draw(window);
+        services.Views().draw(window);
         window.display();
     }
 

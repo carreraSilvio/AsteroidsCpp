@@ -12,7 +12,9 @@ class Play_GameState : public BrightState
 {
 public:
 	Play_GameState();
+
 	void enter();
+	void exit();
 	std::type_index update(float);
 	void draw(sf::RenderWindow&);
 
@@ -34,6 +36,9 @@ private:
 
 	//UI
 	ScoreView* scoreView;
+
+	void increaseScore(Asteroid::Size asteroidSize);
+	void setScore(int mewScore);
 
 	//event handlers
 	void handlePlayerShoot();

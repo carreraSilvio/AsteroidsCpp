@@ -5,11 +5,6 @@
 
 class BrightViewManager
 {
-private:
-	std::unordered_map<std::type_index, std::unique_ptr<BrightView>> views;
-	std::vector<BrightView*> openedViews;
-	inline static const std::string DEFAULT_FONT_PATH = "resources/arial.ttf";
-
 public:
 	inline static unsigned int DEFAULT_FONT_SIZE_SMALL = 18;  // for HUD labels, button text, minor info
 	inline static unsigned int DEFAULT_FONT_SIZE_MEDIUM = 24; // for standard UI text, menus, scores
@@ -25,10 +20,19 @@ public:
 	T* openView();
 
 	template<typename T>
+	void closeView();
+
+	template<typename T>
 	T* getView();
 
 	void update(float);
 	void draw(sf::RenderWindow&);
+
+private:
+	std::unordered_map<std::type_index, std::unique_ptr<BrightView>> views;
+	std::unordered_map<std::type_index, BrightView*> openedViews;
+	inline static const std::string DEFAULT_FONT_PATH = "resources/arial.ttf";
+
 };
 
 template<typename T>
@@ -47,10 +51,21 @@ T* BrightViewManager::addView()
 template<typename T>
 T* BrightViewManager::openView()
 {
-	T* view = views[typeid(T)].get();
+	T* view = static_cast<T*>(views[typeid(T)].get());
 	view->open();
-	openedViews.push_back(view);
+	openedViews[typeid(T)] = view;
 	return view;
+}
+
+template<typename T>
+void BrightViewManager::closeView()
+{
+	auto it = openedViews.find(typeid(T));
+	if (it != openedViews.end())
+	{
+		it->second->close();
+		openedViews.erase(it);
+	}
 }
 
 template<typename T>

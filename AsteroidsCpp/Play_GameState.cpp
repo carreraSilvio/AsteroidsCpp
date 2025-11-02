@@ -39,6 +39,12 @@ void Play_GameState::enter()
 
     scoreView->setScore(0);
     scoreView->setHighscore(Services::Highscore().getHighscore());
+    Services::Views().openView<ScoreView>();
+}
+
+void Play_GameState::exit()
+{
+    Services::Views().openView<ScoreView>();
 }
 
 std::type_index Play_GameState::update(float dt)
@@ -103,6 +109,7 @@ std::type_index Play_GameState::update(float dt)
                 }
                 bullet.active = false;
                 asteroid.active = false;
+                increaseScore(asteroid.size);
 
                 if (!asteroid.canBreak())
                 {
@@ -112,7 +119,7 @@ std::type_index Play_GameState::update(float dt)
                 Asteroid::Size newAsteroidSize = asteroid.size == Asteroid::Size::Large ?
                     Asteroid::Size::Medium :
                     Asteroid::Size::Small;
-                int spawnAmount = 3;
+                int spawnAmount = BrightRandom::range(2,3);
                 while (spawnAmount > 0)
                 {
                     Asteroid& newAsteroid = asteroidSpawner.spawnAt(asteroid.position);
@@ -138,14 +145,13 @@ std::type_index Play_GameState::update(float dt)
         {
             //save
             Services::Highscore().updateHighscore(playerScore);
-            playerScore = 0;
-            scoreView->setScore(playerScore);
+            setScore(0);
             scoreView->setHighscore(Services::Highscore().getHighscore());
             Services::Highscore().save();
 
             //reset
             asteroidSpawner.despawnAll();
-            //asteroid.setPosition(getRandomFreePosition(ship));
+            bullets.deactivateAll();
             ship.resetPosition();
 
             subState = GameState::Playing;
@@ -170,8 +176,27 @@ void Play_GameState::draw(sf::RenderWindow& window)
     {
         bullet.draw(window);
     }
+}
 
-    scoreView->draw(window);
+void Play_GameState::increaseScore(Asteroid::Size asteroidSize)
+{
+    int asteroidScore = 0;
+    switch (asteroidSize)
+    {
+        case Asteroid::Size::Large:  asteroidScore = 20;  break;
+        case Asteroid::Size::Medium: asteroidScore = 50;  break;
+        case Asteroid::Size::Small:  asteroidScore = 100; break;
+        default:                     asteroidScore = 0;   break;
+    }
+
+    setScore(playerScore + asteroidScore);
+}
+
+
+void Play_GameState::setScore(int newScore)
+{
+    playerScore = newScore;
+    scoreView->setScore(playerScore);
 }
 
 void Play_GameState::handlePlayerShoot()
@@ -196,38 +221,4 @@ void Play_GameState::handleAsteroidSpawn(Asteroid& asteroid)
 
     //reset timer
     asteroid.lifetimeTimer.reset();
-} 
-
-sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)
-{
-    sf::Vector2f pos;
-    bool collision;
-
-    int gridWidth = GameConstants::WINDOW_WIDTH / GameConstants::PLAYER_SHIP_SIZE;
-    int gridHeight = GameConstants::WINDOW_HEIGHT / GameConstants::PLAYER_SHIP_SIZE;
-
-    const float tolernace = 0.05f;
-
-    do 
-    {
-        collision = false;
-        int cellX = rand() % gridWidth;
-        int cellY = rand() % gridHeight;
-        pos.x = cellX * GameConstants::PLAYER_SHIP_SIZE;
-        pos.y = cellY * GameConstants::PLAYER_SHIP_SIZE;
-
-        float distanceX = ship.position.x - pos.x;
-        float distanceY = ship.position.y - pos.y;
-        if (distanceX < 0) distanceX *= -1;
-        if (distanceY < 0) distanceY *= -1;
-
-        if (distanceX < tolernace && distanceY < tolernace)
-        {
-            collision = true;
-            break;
-        }
-        
-    } while (collision);
-
-    return pos;
 }

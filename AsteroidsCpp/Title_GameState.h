@@ -10,7 +10,7 @@ public:
 
 	Title_GameState();
 	void enter();
+	void exit();
 	std::type_index update(float);
-	void draw(sf::RenderWindow&);
 };
 

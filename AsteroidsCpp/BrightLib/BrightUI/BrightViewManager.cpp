@@ -10,16 +10,16 @@ BrightViewManager::BrightViewManager()
 
 void BrightViewManager::update(float dt)
 {
-	for (size_t i = 0; i < openedViews.size(); ++i)
+	for (auto view : openedViews)
 	{
-		openedViews[i]->update(dt);
+		view.second->update(dt);
 	}
 }
 
 void BrightViewManager::draw(sf::RenderWindow& window)
 {
-	for (size_t i = 0; i < openedViews.size(); ++i)
+	for (auto view : openedViews)
 	{
-		openedViews[i]->draw(window);
+		view.second->draw(window);
 	}
 }
