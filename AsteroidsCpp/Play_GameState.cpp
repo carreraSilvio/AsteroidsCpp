@@ -63,14 +63,23 @@ std::type_index Play_GameState::update(float dt)
             bullet.update(dt);
         }
 
-        /*
-        //check collision with fruit
-        sf::Vector2f circleCenter = fruit.shape.getPosition() + sf::Vector2f(fruit.shape.getRadius(), fruit.shape.getRadius());
-        if (fruit.active && CollisionManager::checkCollisionCircleRect(circleCenter, fruit.shape.getRadius(), snake.getHead().shape.getGlobalBounds()))
+       
+        //collision between asteroids and ship
+        for (Asteroid& asteroid : asteroidSpawner.pool.getAll())
         {
-            subState = GameState::PlayerAteFruit;
-        }
+            if (!asteroid.active)
+            {
+                continue;
+            }
 
+            if (CollisionManager::checkOverlap(asteroid.shape, ship.shape))
+            {
+                subState = GameState::PlayerDead;
+            }
+        }
+        
+
+        /*
         //check collision with body
         if (snake.pieces.size() > 5)
         {
@@ -90,20 +99,20 @@ std::type_index Play_GameState::update(float dt)
         */
 
     }
-    else if (subState == GameState::PlayerDied)
+    else if (subState == GameState::PlayerDead)
     {
         playerDiedTimer = 0.0f;
         //playsfx?
         
-        subState = GameState::DelayAfterPlayerDied;
+        subState = GameState::DelayAfterPlayerDead;
     }
-    else if (subState == GameState::DelayAfterPlayerDied)
+    else if (subState == GameState::DelayAfterPlayerDead)
     {
         playerDiedTimer += dt;
         if (playerDiedTimer > 0.2f)
         {
             //save
-            Services::Highscore().tryUpdateHighscore(playerScore);
+            Services::Highscore().updateHighscore(playerScore);
             playerScore = 0;
             scoreView->setScore(playerScore);
             scoreView->setHighscore(Services::Highscore().getHighscore());

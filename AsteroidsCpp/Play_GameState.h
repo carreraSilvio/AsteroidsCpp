@@ -19,11 +19,9 @@ public:
 private:
 	enum class GameState
 	{
-		Playing = 0,
-		PlayerAteFruit = 1,
-		DelayAfterEatingFruit = 2,
-		PlayerDied = 3,
-		DelayAfterPlayerDied,
+		Playing,
+		PlayerDead,
+		DelayAfterPlayerDead,
 	};
 	GameState subState = GameState::Playing;
 
@@ -37,6 +35,7 @@ private:
 
 	//UI
 	ScoreView* scoreView;
+
 	//event handlers
 	void handlePlayerShoot();
 	void handleAsteroidSpawn(Asteroid& asteroid);

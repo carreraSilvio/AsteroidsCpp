@@ -16,7 +16,7 @@ public:
 	}
 
 	/// <summary>
-	/// Retuns an entity that's available to be used. Which here means its active flag is false.
+	/// Retuns an entity that's available to be used. Available means the entity is not active.
 	/// </summary>
 	T& getAvailable()
 	{

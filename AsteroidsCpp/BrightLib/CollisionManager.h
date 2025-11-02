@@ -1,7 +1,6 @@
 #pragma once
-#include <utility>
 
-///DevNote: No need to instantiate this ever so that is why it's just within a namespace
+///No need to instantiate this ever so that is why it's just within a namespace
 namespace CollisionManager
 {
     float clamp(float value, float min, float max)
@@ -9,8 +8,15 @@ namespace CollisionManager
         return std::max(min, std::min(value, max));
     }
 
-    bool checkCollisionCircleRect(const sf::Vector2f& circleCenter, float radius, const sf::FloatRect& rect)
+    /// <summary>
+    /// Checks if a circle shape is overlap by another shape
+    /// </summary>
+    bool checkOverlap(const sf::CircleShape& circleShape, const sf::Shape& shape)
     {
+        sf::Vector2f circleCenter = circleShape.getPosition() + sf::Vector2f(circleShape.getRadius(), circleShape.getRadius());
+        float radius = circleShape.getRadius();
+        const sf::FloatRect& rect = shape.getGlobalBounds();
+
         // Find the closest point on the rectangle to the circle's center
         float closestX = clamp(circleCenter.x, rect.position.x, rect.position.x + rect.size.x);
         float closestY = clamp(circleCenter.y, rect.position.y, rect.position.y + rect.size.y);
@@ -23,7 +29,10 @@ namespace CollisionManager
         return (dx * dx + dy * dy) <= (radius * radius);
     }
 
-    bool checkCollisionRectRect(const sf::RectangleShape& rectA, const sf::RectangleShape& rectB)
+    /// <summary>
+    /// Checks if two rectangles overlap.
+    /// </summary>
+    bool checkOverlap(const sf::RectangleShape& rectA, const sf::RectangleShape& rectB)
     {
         sf::FloatRect a = rectA.getGlobalBounds();
         sf::FloatRect b = rectB.getGlobalBounds();

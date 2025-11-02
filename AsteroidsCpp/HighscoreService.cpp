@@ -6,7 +6,7 @@ void HighscoreService::resetHighscore()
 	highscore = 0;
 }
 
-void HighscoreService::tryUpdateHighscore(unsigned int score)
+void HighscoreService::updateHighscore(unsigned int score)
 {
 	if (score > highscore)
 	{

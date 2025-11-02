@@ -6,30 +6,28 @@ class HighscoreService
 {
 public:
 	/// <summary>
-	/// Resests highscore to 0
+	/// Resets highscore to 0
 	/// </summary>
 	void resetHighscore();
 	
 	/// <summary>
-	/// Update the highscore if the provided scorer is greater than the highscore
+	/// Updates the highscore if the provided score is greater
 	/// </summary>
-	void tryUpdateHighscore(unsigned int score);
+	void updateHighscore(unsigned int score);
 
 	/// <summary>
-	/// Get latest highscore
+	/// Gets latest highscore
 	/// </summary>
-	/// <returns></returns>
 	unsigned int getHighscore();
 
 	/// <summary>
-	/// Save highscore to file
+	/// Saves highscore to file
 	/// </summary>
 	void save();
 
 	/// <summary>
-	/// Load highscore from file
+	/// Loads highscore from file
 	/// </summary>
-	/// <returns></returns>
 	void load();
 
 private:
