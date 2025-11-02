@@ -60,8 +60,19 @@ void Asteroid::setPosition(sf::Vector2f position)
 void Asteroid::setRandomSize()
 {
 	float chance = BrightRandom::range(0, 100);
-	Asteroid::Size newSize = chance < SMALL_SIZE_CHANCE ? Asteroid::Size::Small : Asteroid::Size::Medium;
-	newSize = chance < SMALL_SIZE_CHANCE + MEDIUM_SIZE_CHANCE ? size : Asteroid::Size::Large;
+	Asteroid::Size newSize;
+	if (chance < SMALL_SIZE_CHANCE)
+	{
+		newSize = Asteroid::Size::Small;
+	}
+	else if (chance < SMALL_SIZE_CHANCE + MEDIUM_SIZE_CHANCE)
+	{
+		newSize = Asteroid::Size::Medium;
+	}
+	else
+	{
+		newSize = Asteroid::Size::Large;
+	}
 	setSize(newSize);
 }
 
