@@ -22,7 +22,7 @@ public:
 
 	float radius;
 	sf::CircleShape shape;
-	BrightTimer lifetimeTimer;
+	BrightTimer lifetimeTimer; 
 
 	//functions
 	Asteroid(float x, float y);

@@ -21,6 +21,7 @@ public:
 	const sf::Angle rotationSpeed = sf::degrees(180.f);//degrees per second
 
 	sf::ConvexShape shape;
+	sf::RectangleShape thrusterShape;
 
 	Ship(float x, float y);
 	void update(float deltaTime);
@@ -35,6 +36,10 @@ public:
 	const sf::Vector2f getForwardVector();
 
 private:
+	bool thrusting = false;
 	BrightTimer shootTimer;
 	inline static constexpr float SHOOT_INTERVAL = 0.3f;
+
+	inline static constexpr float THRUSTER_LENGTH = 15.0f;
+	inline static constexpr float THRUSTER_THICKNESS = 3.0f;
 };

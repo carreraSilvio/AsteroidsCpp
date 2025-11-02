@@ -5,7 +5,8 @@
 Ship::Ship(float x, float y) 
 	: thrust(200.0f),
 	shootTimer(SHOOT_INTERVAL),
-	linerDamping(0.75f)
+	linerDamping(0.75f),
+	thrusterShape({ THRUSTER_LENGTH, THRUSTER_THICKNESS })
 {
 	rotation = sf::degrees(0.0f);
 
@@ -16,6 +17,9 @@ Ship::Ship(float x, float y)
 	shape.setOrigin(sf::Vector2(0.0f, 0.0f));
 	shape.setFillColor(sf::Color::Blue);
 	shape.setPosition(sf::Vector2(x, y));
+
+	thrusterShape.setFillColor(sf::Color::Red);
+	thrusterShape.setOrigin({ 0.0f, THRUSTER_THICKNESS / 2.0f });
 }
 
 void Ship::resetPosition()
@@ -36,12 +40,14 @@ void Ship::update(float dt)
 		rotation += rotationSpeed * dt;
 	}
 
-	// thrust (booster)
+	// thrust
+	thrusting = false;
 	if (Services::Input().isButtonPressed(BrightActionButton::THRUST))
 	{
 		float rad = rotation.asRadians();
 		sf::Vector2f forward(std::cos(rad), std::sin(rad));
 		velocity += forward * thrust * dt;
+		thrusting = true;
 	}
 
 	// apply velocity and drag
@@ -60,6 +66,22 @@ void Ship::update(float dt)
 
 void Ship::draw(sf::RenderWindow& window)
 {
+	if (thrusting)
+	{
+		sf::Vector2f forward = getForwardVector();
+		sf::Vector2f center = shape.getPosition();
+
+		// orient opposite to the ship's forward vector
+		thrusterShape.setRotation(rotation + sf::degrees(180.f));
+
+		// start from ship center
+		thrusterShape.setPosition(center);
+
+		//vary size slightly so it seems like it's animated
+		thrusterShape.setSize({ BrightRandom::range(THRUSTER_LENGTH, THRUSTER_LENGTH + 5.0f), THRUSTER_THICKNESS });
+
+		window.draw(thrusterShape);
+	}
 	window.draw(shape);
 }
 
