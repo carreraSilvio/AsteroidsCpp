@@ -9,6 +9,7 @@ class Asteroid : public BrightEntity
 {
 public:
 	//members
+	float size;
 	float speed;
 	sf::Vector2f direction;
 
@@ -26,6 +27,20 @@ public:
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f);
 
+	void setRandomSizeAndSpeed();
+
+	bool canBreak();
+
+private:
+	inline static constexpr float SMALL_SIZE = 10.0f;
+	inline static constexpr float MEDIUM_SIZE = 30.0f;
+	inline static constexpr float LARGE_SIZE = 50.0f;
+	static const unsigned int SMALL_SIZE_CHANCE = 50.0f;
+	static const unsigned int MEDIUM_SIZE_CHANCE = 30.0f;
+
+	inline static constexpr float LOW_SPEED = 50.0f;
+	inline static constexpr float MEDIUM_SPEED = 80.0f;
+	inline static constexpr float HIGH_SPEED = 120.0f;
 };
 
 #endif // ASTEROID_H

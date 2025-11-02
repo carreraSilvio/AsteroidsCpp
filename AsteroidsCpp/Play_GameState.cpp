@@ -169,17 +169,8 @@ void Play_GameState::handleAsteroidSpawn(Asteroid& asteroid)
     sf::Vector2f normalizedDirection = (len != 0) ? dir / len : sf::Vector2f{ 0.f, 0.f };
     asteroid.direction = normalizedDirection;
 
-    //set size
-    float small = 20.0f;
-    float medium = 30.0f;
-    float large = 50.0f;
-    float range = BrightRandom::range(0, 100);
-    float size = range < 50 ? small : medium;
-    size = range < 80 ? medium : large;
-    asteroid.shape.setRadius(size);
-
-    //set speed
-    //asteroid.setRandomSpeed();
+    //set size and speed
+    asteroid.setRandomSizeAndSpeed();
 }   
 
 sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)
