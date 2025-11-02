@@ -13,7 +13,7 @@ public:
     explicit BrightTimer(float targetDuration = 0.0f): targetDuration(targetDuration) {}
 
     /// <summary>
-    /// Updates elapsed time and returns true whe it has reached or exceeded the target duration.
+    /// Updates elapsed time and returns true if it has reached the target duration.
     /// </summary>
     bool update(float dt)
     {

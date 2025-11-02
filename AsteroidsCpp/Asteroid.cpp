@@ -4,8 +4,8 @@
 
 Asteroid::Asteroid(float x, float y) 
 	: BrightEntity(),
-	size(SMALL_SIZE),
-	speed(LOW_SPEED),
+	size(Asteroid::Size::Small),
+	speed(HIGH_SPEED),
 	direction(0.0f,0.0f),
 	radius(50.0f)
 {
@@ -57,23 +57,42 @@ void Asteroid::setPosition(sf::Vector2f position)
 	shape.setPosition(position);
 }
 
-void Asteroid::setRandomSizeAndSpeed()
+void Asteroid::setRandomSize()
 {
 	float chance = BrightRandom::range(0, 100);
-	size = SMALL_SIZE;
-	size = chance < SMALL_SIZE_CHANCE ? SMALL_SIZE : MEDIUM_SIZE;
-	size = chance < SMALL_SIZE_CHANCE + MEDIUM_SIZE_CHANCE ? size : LARGE_SIZE;
-	shape.setRadius(size);
-	
-	speed = size <= SMALL_SIZE ? HIGH_SPEED : MEDIUM_SPEED;
-	speed = size <= MEDIUM_SIZE ? speed : LOW_SPEED;
+	Asteroid::Size newSize = chance < SMALL_SIZE_CHANCE ? Asteroid::Size::Small : Asteroid::Size::Medium;
+	newSize = chance < SMALL_SIZE_CHANCE + MEDIUM_SIZE_CHANCE ? size : Asteroid::Size::Large;
+	setSize(newSize);
 }
+
+void Asteroid::setSize(Asteroid::Size newSize)
+{
+	switch (newSize)
+	{
+	case Asteroid::Size::Small:
+		shape.setRadius(SMALL_SIZE);
+		speed = HIGH_SPEED;
+		break;
+
+	case Asteroid::Size::Medium:
+		shape.setRadius(MEDIUM_SIZE);
+		speed = MEDIUM_SPEED;
+		break;
+
+	case Asteroid::Size::Large:
+		shape.setRadius(LARGE_SIZE);
+		speed = LOW_SPEED;
+		break;
+	}
+	size = newSize;
+}
+
 
 bool Asteroid::canBreak()
 {
-	if (size > SMALL_SIZE)
+	if (size == Asteroid::Size::Small)
 	{
-		return true;
+		return false;
 	}
-	return false;
+	return true;
 }

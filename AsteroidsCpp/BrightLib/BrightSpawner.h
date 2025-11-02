@@ -28,10 +28,42 @@ public:
 
 		if (spawnTimer.update(dt))
 		{
-			T& spawned = pool.getAvailable();
-			spawned.active = true;
-			onSpawn.fire(spawned);
+			spawn();
 			spawnTimer.reset();
+		}
+	}
+
+	T& spawn()
+	{
+		T& spawned = pool.getAvailable();
+		spawned.position = position;
+		spawned.active = true;
+		onSpawn.fire(spawned);
+		return spawned;
+	}
+
+	void spawn(unsigned int spawnAmount)
+	{
+		while (spawnAmount > 0)
+		{
+			spawn();
+			spawnAmount--;
+		}
+	}
+
+	T& spawnAt(sf::Vector2f position)
+	{
+		T& spawned = spawn();
+		spawned.position = position;
+		return spawned;
+	}
+
+	void spawnAt(sf::Vector2f position, unsigned int spawnAmount)
+	{
+		while (spawnAmount > 0)
+		{
+			spawnAt(position);
+			spawnAmount--;
 		}
 	}
 

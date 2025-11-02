@@ -6,7 +6,7 @@
 
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     ship(50.0f, 50.0f),
-    asteroidSpawner(20, 2.3f),
+    asteroidSpawner(50, 2.3f),
     bullets(20),
     playerScore(0),
     restartGameTimer(0.3f)
@@ -93,10 +93,29 @@ std::type_index Play_GameState::update(float dt)
                     continue;
                 }
 
-                if (CollisionManager::checkOverlap(asteroid.shape, bullet.shape))
+                if (!CollisionManager::checkOverlap(asteroid.shape, bullet.shape))
                 {
-                    bullet.active = false;
-                    asteroid.active = false;
+                    continue;
+                }
+                bullet.active = false;
+                asteroid.active = false;
+
+                if (!asteroid.canBreak())
+                {
+                    continue;
+                }
+
+                Asteroid::Size newAsteroidSize = asteroid.size == Asteroid::Size::Large ?
+                    Asteroid::Size::Medium :
+                    Asteroid::Size::Small;
+                int spawnAmount = 3;
+                while (spawnAmount > 0)
+                {
+                    Asteroid& newAsteroid = asteroidSpawner.spawnAt(asteroid.position);
+                    newAsteroid.direction = BrightRandom::getRandomNormalizedDirection();
+                    newAsteroid.setSize(newAsteroidSize);
+
+                    spawnAmount--;
                 }
             }
         }
@@ -155,14 +174,12 @@ void Play_GameState::handlePlayerShoot()
     Bullet& bullet = bullets.getAvailable();
     bullet.setPosition(ship.getFrontPoint());
     bullet.direction = ship.getForwardVector();
+    bullet.lifetimeTimer.reset();
     bullet.active = true;
 }
 
 void Play_GameState::handleAsteroidSpawn(Asteroid& asteroid)
 {
-    //set position
-    asteroid.position = { asteroidSpawner.position.x, asteroidSpawner.position.y };
-
     //set direction
     sf::Vector2f dir = sf::Vector2f{GameConstants::WINDOW_WIDTH / 2.0f, GameConstants::WINDOW_HEIGHT / 2.0f} - asteroid.position;
     float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
@@ -170,8 +187,8 @@ void Play_GameState::handleAsteroidSpawn(Asteroid& asteroid)
     asteroid.direction = normalizedDirection;
 
     //set size and speed
-    asteroid.setRandomSizeAndSpeed();
-}   
+    asteroid.setRandomSize();
+} 
 
 sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)
 {

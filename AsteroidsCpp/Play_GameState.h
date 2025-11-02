@@ -38,6 +38,7 @@ private:
 	//event handlers
 	void handlePlayerShoot();
 	void handleAsteroidSpawn(Asteroid& asteroid);
+	void handleDynamicAsteroidSpawn(Asteroid& asteroid);
 
 	sf::Vector2f getRandomFreePosition(const Ship& ship);
 };

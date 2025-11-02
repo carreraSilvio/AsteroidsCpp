@@ -8,8 +8,14 @@
 class Asteroid : public BrightEntity
 {
 public:
+	enum class Size 
+	{
+		Small,
+		Medium,
+		Large
+	};
 	//members
-	float size;
+	Size size;
 	float speed;
 	sf::Vector2f direction;
 
@@ -27,7 +33,15 @@ public:
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f);
 
-	void setRandomSizeAndSpeed();
+	/// <summary>
+	/// Sets a random size based on the odds set. Also affects speed.
+	/// </summary>
+	void setRandomSize();
+
+	/// <summary>
+	/// Sets the asteroid size. Also affects speed.
+	/// </summary>
+	void setSize(Asteroid::Size size);
 
 	bool canBreak();
 

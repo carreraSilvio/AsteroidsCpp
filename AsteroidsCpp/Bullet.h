@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "BrightLib/BrightEntity.h"
+#include "BrightLib/BrightTimer.h"
 
 class Bullet : public BrightEntity
 {
@@ -10,7 +11,7 @@ public:
 	sf::Vector2f direction;
 	sf::CircleShape shape;
 
-	float lifetimeTimer;
+	BrightTimer lifetimeTimer;
 
 	//functions
 	Bullet(float x, float y);
@@ -22,5 +23,5 @@ public:
 	void setPosition(sf::Vector2f);
 
 private:
-	const float LIFETIME_DURATION = 2.5f;
+	inline static constexpr float LIFETIME_DURATION = 2.5f;
 };

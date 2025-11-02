@@ -1,6 +1,7 @@
 #pragma once
 
 #include <random>
+#include <SFML/System.hpp>
 
 namespace BrightRandom 
 {
@@ -33,5 +34,11 @@ namespace BrightRandom
         int steps = static_cast<int>((max - min) / step);
         std::uniform_int_distribution<int> dist(0, steps);
         return min + dist(rng) * step;
+    }
+
+    inline sf::Vector2f getRandomNormalizedDirection()
+    {
+        float angle = range(0.f, 2.f * 3.14159265f);
+        return sf::Vector2f(std::cos(angle), std::sin(angle));
     }
 }
