@@ -6,7 +6,7 @@
 
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     ship(50.0f, 50.0f),
-    asteroidSpawner(50, 2.3f),
+    asteroidSpawner(50, 2.3f, 0.3f),
     bullets(20),
     playerScore(0),
     restartGameTimer(0.3f)

@@ -15,9 +15,9 @@ public:
 	BrightEvent<T&> onSpawn;
 
 	//constructor
-	BrightSpawner(size_t poolSize, float spawnInterval) 
+	BrightSpawner(size_t poolSize, float spawnInterval, float spawnIntervalOffset = 0.0f) 
 		: pool(poolSize), 
-		spawnTimer(spawnInterval) {}
+		spawnTimer(spawnInterval, spawnIntervalOffset) {}
 
 	void update(float dt) 
 	{

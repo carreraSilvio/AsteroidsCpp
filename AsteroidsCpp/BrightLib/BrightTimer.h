@@ -1,4 +1,5 @@
 #pragma once
+#include "BrightRandom.h"
 
 /// <summary>
 /// Utility timer for time-based logic.
@@ -10,7 +11,8 @@
 class BrightTimer
 {
 public:
-    explicit BrightTimer(float targetDuration = 0.0f): targetDuration(targetDuration) {}
+    explicit BrightTimer(float targetDuration = 0.0f, float offset = 0.0f)
+        : elapsedTime(0.0f), targetDuration(targetDuration), offset(0.0f) {}
 
     /// <summary>
     /// Updates elapsed time and returns true if it has reached the target duration.
@@ -27,6 +29,7 @@ public:
     void reset() 
     { 
         elapsedTime = 0.f; 
+        this->targetDuration = targetDuration + BrightRandom::range(0.0f, offset);
     }
 
     /// <summary>
@@ -54,7 +57,8 @@ public:
     }
 
 private:
-    float elapsedTime = 0.0f;  
-    float targetDuration = 0.0f;  
+    float elapsedTime;  
+    float targetDuration;
+    float offset;
 };
 
