@@ -1,9 +1,9 @@
-#ifndef ASTEROID_H
-#define ASTEROID_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
-#include "BrightLib/BrightEvent.h"
 #include "BrightLib/BrightEntity.h"
+#include "BrightLib/BrightEvent.h"
+#include "BrightLib/BrightTimer.h"
 
 class Asteroid : public BrightEntity
 {
@@ -14,6 +14,7 @@ public:
 		Medium,
 		Large
 	};
+
 	//members
 	Size size;
 	float speed;
@@ -21,6 +22,7 @@ public:
 
 	float radius;
 	sf::CircleShape shape;
+	BrightTimer lifetimeTimer;
 
 	//functions
 	Asteroid(float x, float y);
@@ -55,6 +57,6 @@ private:
 	inline static constexpr float LOW_SPEED = 50.0f;
 	inline static constexpr float MEDIUM_SPEED = 80.0f;
 	inline static constexpr float HIGH_SPEED = 120.0f;
-};
 
-#endif // ASTEROID_H
+	inline static constexpr float LIFETIME_DURATION = 2.5f;
+};

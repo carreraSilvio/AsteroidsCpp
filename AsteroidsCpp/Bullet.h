@@ -10,7 +10,6 @@ public:
 	float speed;
 	sf::Vector2f direction;
 	sf::CircleShape shape;
-
 	BrightTimer lifetimeTimer;
 
 	//functions
@@ -23,5 +22,6 @@ public:
 	void setPosition(sf::Vector2f);
 
 private:
+	
 	inline static constexpr float LIFETIME_DURATION = 2.5f;
 };

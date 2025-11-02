@@ -7,7 +7,8 @@ Asteroid::Asteroid(float x, float y)
 	size(Asteroid::Size::Small),
 	speed(HIGH_SPEED),
 	direction(0.0f,0.0f),
-	radius(50.0f)
+	radius(50.0f),
+	lifetimeTimer(LIFETIME_DURATION)
 {
 	position = {x, y};
 
@@ -28,6 +29,11 @@ void Asteroid::update(float dt)
 {
 	if (!active)
 	{
+		return;
+	}
+	if (lifetimeTimer.update(dt))
+	{
+		lifetimeTimer.reset();
 		return;
 	}
 

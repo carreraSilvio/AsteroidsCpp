@@ -187,6 +187,9 @@ void Play_GameState::handleAsteroidSpawn(Asteroid& asteroid)
 
     //set size and speed
     asteroid.setRandomSize();
+
+    //reset timer
+    asteroid.lifetimeTimer.reset();
 } 
 
 sf::Vector2f Play_GameState::getRandomFreePosition(const Ship& ship)
