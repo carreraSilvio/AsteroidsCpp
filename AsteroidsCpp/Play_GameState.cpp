@@ -6,7 +6,7 @@
 
 Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     ship(50.0f, 50.0f),
-    asteroidSpawner(50, 2.3f, 0.3f),
+    asteroidSpawner(50, 1.2f, 0.3f),
     bullets(20),
     playerScore(0),
     restartGameTimer(0.3f)
@@ -17,6 +17,11 @@ Play_GameState::Play_GameState() : BrightState(typeid(Play_GameState)),
     //hook up events
     ship.onShoot.subscribe([this]() { handlePlayerShoot(); });
     asteroidSpawner.onSpawn.subscribe([this](Asteroid& asteroid) { handleAsteroidSpawn(asteroid); });
+
+    asteroidSpawner.addSpawnPoint({ -5.0f, -5.0f });//topleft
+    asteroidSpawner.addSpawnPoint({ -5.0f, GameConstants::WINDOW_HEIGHT + 5.0f });//botleft
+    asteroidSpawner.addSpawnPoint({ GameConstants::WINDOW_WIDTH + 5.0f, -5.0f });//topright
+    asteroidSpawner.addSpawnPoint({ GameConstants::WINDOW_WIDTH + 5.0f, GameConstants::WINDOW_HEIGHT + 5.0f });//botright
 }
 
 void Play_GameState::enter()
@@ -26,7 +31,7 @@ void Play_GameState::enter()
 
     ship.setPosition(windowCenterX, windowCenterY);
 
-    asteroidSpawner.position = { -5.0f, -5.0f};
+    //asteroidSpawner.position = { -5.0f, -5.0f};
     //asteroidSpawner.position = { windowCenterX / 2.0f, windowCenterY / 2.0f };
     //asteroid.setPosition(windowCenterX/2.0f, windowCenterY/2.0f);
 
@@ -113,6 +118,7 @@ std::type_index Play_GameState::update(float dt)
                     Asteroid& newAsteroid = asteroidSpawner.spawnAt(asteroid.position);
                     newAsteroid.direction = BrightRandom::getRandomNormalizedDirection();
                     newAsteroid.setSize(newAsteroidSize);
+                    newAsteroid.lifetimeTimer.reset();
 
                     spawnAmount--;
                 }

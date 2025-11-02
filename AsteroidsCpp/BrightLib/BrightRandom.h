@@ -19,7 +19,8 @@ namespace BrightRandom
         return dist(rng);
     }
 
-    inline float range(const std::vector<float>& values)
+    template<typename T>
+    inline T range(const std::vector<T>& values)
     {
         std::uniform_int_distribution<size_t> dist(0, values.size() - 1);
         return values[dist(rng)];
@@ -38,7 +39,7 @@ namespace BrightRandom
 
     inline sf::Vector2f getRandomNormalizedDirection()
     {
-        float angle = range(0.f, 2.f * 3.14159265f);
+        float angle = range(0.0f, 2.0f * 3.14f);
         return sf::Vector2f(std::cos(angle), std::sin(angle));
     }
 }

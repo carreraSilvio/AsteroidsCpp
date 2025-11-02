@@ -56,7 +56,7 @@ private:
 
 	inline static constexpr float LOW_SPEED = 50.0f;
 	inline static constexpr float MEDIUM_SPEED = 80.0f;
-	inline static constexpr float HIGH_SPEED = 120.0f;
+	inline static constexpr float HIGH_SPEED = 150.0f;
 
 	inline static constexpr float LIFETIME_DURATION = 2.5f;
 };

@@ -17,7 +17,8 @@ public:
 	//constructor
 	BrightSpawner(size_t poolSize, float spawnInterval, float spawnIntervalOffset = 0.0f) 
 		: pool(poolSize), 
-		spawnTimer(spawnInterval, spawnIntervalOffset) {}
+		spawnTimer(spawnInterval, spawnIntervalOffset),
+		spawnPoints(){}
 
 	void update(float dt) 
 	{
@@ -35,11 +36,10 @@ public:
 
 	T& spawn()
 	{
-		T& spawned = pool.getAvailable();
-		spawned.position = position;
-		spawned.active = true;
-		onSpawn.fire(spawned);
-		return spawned;
+		sf::Vector2f newPosition = spawnPoints.empty() ? 
+			position
+			: BrightRandom::range<sf::Vector2f>(spawnPoints);
+		return spawnAt(newPosition);
 	}
 
 	void spawn(unsigned int spawnAmount)
@@ -51,14 +51,16 @@ public:
 		}
 	}
 
-	T& spawnAt(sf::Vector2f position)
+	T& spawnAt(const sf::Vector2f& position)
 	{
-		T& spawned = spawn();
+		T& spawned = pool.getAvailable();
 		spawned.position = position;
+		spawned.active = true;
+		onSpawn.fire(spawned);
 		return spawned;
 	}
 
-	void spawnAt(sf::Vector2f position, unsigned int spawnAmount)
+	void spawnAt(const sf::Vector2f& position, unsigned int spawnAmount)
 	{
 		while (spawnAmount > 0)
 		{
@@ -76,10 +78,16 @@ public:
 		}
 	}
 
+	void addSpawnPoint(sf::Vector2f newSpawnPoint)
+	{
+		spawnPoints.push_back(newSpawnPoint);
+	}
+
 	//todo: temp, should be private
 	BrightPool<T> pool;
 
 private:
 	BrightTimer spawnTimer;
+	std::vector<sf::Vector2f> spawnPoints;
 };
 
