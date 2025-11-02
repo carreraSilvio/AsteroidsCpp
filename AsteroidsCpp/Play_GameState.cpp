@@ -77,26 +77,29 @@ std::type_index Play_GameState::update(float dt)
                 subState = GameState::PlayerDead;
             }
         }
-        
 
-        /*
-        //check collision with body
-        if (snake.pieces.size() > 5)
+        //collision between asteroids and bullets
+        for (Asteroid& asteroid : asteroidSpawner.pool.getAll())
         {
-            for (size_t i = 1; i < snake.pieces.size(); ++i)
+            if (!asteroid.active)
             {
-                SnakePiece piece = snake.pieces[i];
-                float dx = snake.getHead().position.x - snake.pieces[i].position.x;
-                float dy = snake.getHead().position.y - snake.pieces[i].position.y;
-                float distSq = dx * dx + dy * dy;
+                continue;
+            }
 
-                if (distSq < GameConstants::SNAKE_PIECE_SIZE * GameConstants::SNAKE_PIECE_SIZE * 0.25f)
+            for (Bullet& bullet : bullets.getAll())
+            {
+                if (!bullet.active)
                 {
-                    subState = GameState::PlayerDied;
+                    continue;
+                }
+
+                if (CollisionManager::checkOverlap(asteroid.shape, bullet.shape))
+                {
+                    bullet.active = false;
+                    asteroid.active = false;
                 }
             }
         }
-        */
 
     }
     else if (subState == GameState::PlayerDead)
