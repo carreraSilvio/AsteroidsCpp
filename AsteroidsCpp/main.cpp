@@ -9,7 +9,7 @@ int main()
 {
     sf::RenderWindow window(
         sf::VideoMode({ GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT }), 
-        "Bright Snake");
+        "Bright Asteroids");
     sf::Clock deltaClock;
 
     //initialize service locator
