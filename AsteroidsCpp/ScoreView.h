@@ -1,5 +1,4 @@
-#ifndef SCOREVIEW_H
-#define SCOREVIEW_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "BrightLib/BrightUI/BrightView.h"
@@ -9,12 +8,10 @@ class ScoreView : public BrightView
 public:
 	ScoreView();
 
-	void setScore(unsigned int score);
-	void setHighscore(unsigned int highscore);
+	void setScore(int score);
+	void setHighscore(int highscore);
 
 private:
 	sf::Text& playerScore;
 	sf::Text& playerHighscore;
 };
-
-#endif // SCOREVIEW_H

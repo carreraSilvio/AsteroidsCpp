@@ -31,7 +31,7 @@ private:
 	BrightSpawner<Asteroid> asteroidSpawner;
 	BrightPool<Bullet> bullets;
 
-	unsigned int playerScore = 0;
+	int playerScore = 0;
 	BrightTimer restartGameTimer;
 
 	//UI

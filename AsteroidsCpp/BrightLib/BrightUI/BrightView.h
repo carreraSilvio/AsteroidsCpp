@@ -5,7 +5,12 @@
 class BrightView
 {
 public:
-	BrightView(const std::type_index& t) : typeId(t) {}
+	BrightView(const std::type_index& t) : 
+		typeId(t),
+		backgroundRectangle()
+	{
+		backgroundRectangle.setFillColor(sf::Color::Black);
+	}
 
 	const std::type_index& getTypeId() const { return typeId; }
 
@@ -15,8 +20,10 @@ public:
 	virtual void close(); //todo: add event so the manager gets notified when we close directly
 
 	sf::Text& addText();
+	sf::Text& addText(std::string textValue, const unsigned int);
 
 protected:
 	const std::type_index typeId;
 	std::list<sf::Text> texts;
+	sf::RectangleShape backgroundRectangle;
 };

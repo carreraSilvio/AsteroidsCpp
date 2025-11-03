@@ -40,6 +40,7 @@ int main()
 
         //UPDATE
         gameFsm.update(dt);
+        services.Views().update(dt);
         
         //DRAW
         window.clear();

@@ -7,7 +7,7 @@ TitleView::TitleView() : BrightView(typeid(TitleView)),
     gameTitle(addText()),
     pressStart(addText()),
     credits(addText()),
-    blinkTimer(0.3f)
+    blinkTimer(0.5f)
 {
     gameTitle.setString("ASTEROIDS");
     gameTitle.setCharacterSize(BrightViewManager::DEFAULT_FONT_SIZE_LARGE * 2);

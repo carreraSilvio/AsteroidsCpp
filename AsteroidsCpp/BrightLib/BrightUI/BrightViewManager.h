@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include "BrightView.h"
 #include <typeindex>
+#include "BrightView.h"
 
 class BrightViewManager
 {

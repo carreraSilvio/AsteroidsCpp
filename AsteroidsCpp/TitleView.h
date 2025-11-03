@@ -1,5 +1,4 @@
-#ifndef TITLEVIEW_H
-#define TITLEVIEW_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "BrightLib/BrightUI/BrightView.h"
@@ -19,5 +18,3 @@ private:
 
 	BrightTimer blinkTimer;
 };
-
-#endif // TITLEVIEW_H
